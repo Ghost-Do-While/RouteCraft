@@ -369,7 +369,7 @@
             
             if (!tutDone && !tutActive && !isFreshStravaReturn) {
                 document.getElementById('welcomeModal').classList.remove('hidden');
-            } else if (tutActive === 'true' || isFreshStravaReturn) {
+            } else if (!tutDone && (tutActive === 'true' || isFreshStravaReturn)) {
                 isTutorialActive = true;
                 currentStep = isFreshStravaReturn ? 0 : parseInt(localStorage.getItem('tutorialStep') || '0');
                 setTimeout(() => renderTutorialStep(), 500);
