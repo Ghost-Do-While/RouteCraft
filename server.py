@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from fastapi import FastAPI, File, UploadFile, Form, HTTPException
 from fastapi.responses import FileResponse, JSONResponse, RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from strava_client import StravaClient
 from poster_service import generate_poster
 
@@ -14,11 +15,12 @@ STRAVA_REDIRECT_URI = os.getenv("STRAVA_REDIRECT_URI", "http://127.0.0.1:8000/st
 
 strava_client = StravaClient(STRAVA_CLIENT_ID, STRAVA_CLIENT_SECRET, STRAVA_REDIRECT_URI)
 
-# Inicialização de diretórios requeridos em tempo de boot
 for folder in ["saida", "assets/icons", "assets/fonts", "assets/presets"]:
     os.makedirs(folder, exist_ok=True)
 
 app = FastAPI(title="Cycling Poster API")
+
+app.mount("/assets", StaticFiles(directory="assets"), name="assets")
 
 app.add_middleware(
     CORSMiddleware,
