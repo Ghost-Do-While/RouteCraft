@@ -34,6 +34,10 @@ app.add_middleware(
 async def serve_index():
     return FileResponse("index.html")
 
+@app.get("/favicon.ico", include_in_schema=False)
+async def favicon():
+    return FileResponse("assets/images/simbolo_RC.svg")
+
 @app.get("/strava/login")
 async def login_strava():
     return RedirectResponse(strava_client.get_authorization_url())
