@@ -1,16 +1,17 @@
 <div align="center">
 
-# 🚴 Cycling Poster Generator v2.0
+# 🚴 RouteCraft v3.0
 
-### Uma aplicação web e API REST para transformar as métricas das suas pedaladas em arte épica.
+### Uma aplicação web e API REST do estúdio **Velora Labs** para transformar as métricas das suas pedaladas em arte épica.
 
 **Registre sua rota. Aplique seus filtros. Compartilhe sua conquista.**
 
 [![Python Requirements](https://img.shields.io/badge/Python->=3.10-339933?style=flat-square&logo=python&logoColor=white)](#especificações-técnicas)
-[![FastAPI Backend](https://img.shields.io/badge/FastAPI-Backend-009688?style=flat-square&logo=fastapi&logoColor=white)](#como-funciona-pipeline-v2)
+[![FastAPI Backend](https://img.shields.io/badge/FastAPI-Backend-009688?style=flat-square&logo=fastapi&logoColor=white)](#como-funciona-pipeline-v3)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-Frontend-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](#-quick-start)
-[![Clean Architecture](https://img.shields.io/badge/Architecture-Clean_Code-8A2BE2?style=flat-square)](#-novidades-da-versão-20)
+[![Clean Architecture](https://img.shields.io/badge/Architecture-Clean_Code-8A2BE2?style=flat-square)](#✨-novidades-da-versão-30)
 [![MIT license](https://img.shields.io/badge/license-MIT-f4c430?style=flat-square)](LICENSE)
+
 <div align="center">
   <a href="https://ghostdev-poster-generator-v2.onrender.com" target="_blank">
     <img src="https://img.shields.io/badge/🚀_Acessar_Web_Service-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Acessar Web Service">
@@ -19,7 +20,7 @@
 
 <br />
 
-<img width="1536" height="1024" src="https://github.com/user-attachments/assets/a9ffd688-4f5d-4be7-89c8-7c5a43606986" alt="Demonstração da Interface do Cycling Poster Generator"/>
+<img width="1536" height="1024" src="https://github.com/user-attachments/assets/" alt="Demonstração da Interface do RouteCraft"/>
 
 <br /><br />
 
@@ -27,17 +28,23 @@
 
 ---
 
-Fez uma pedalada épica e quer compartilhar os dados no Instagram com qualidade profissional? O **Cycling Poster Generator** é uma aplicação web completa e independente que funde fotografias, dados geoespaciais (Strava Polyline ou GPX) e telemetria, renderizando pôsteres de alta qualidade diretamente no seu navegador. 
+Fez uma pedalada épica e quer compartilhar os dados no Instagram com qualidade profissional? O **RouteCraft** (anteriormente *Cycling Poster Generator*) é uma aplicação web completa e independente desenvolvida sob o guarda-chuva da **Velora Labs** — um projeto focado na criação de um estúdio *open-source* de softwares e ferramentas digitais para o universo do ciclismo.
 
-A versão 2.0 foi totalmente reescrita sob os princípios de **Clean Architecture**, processamento **100% In-Memory** e **Integração OAuth2 com o Strava**.
+O sistema funde fotografias, dados geoespaciais (Strava Polyline ou GPX) e telemetria, renderizando pôsteres de alta qualidade diretamente no seu navegador.
 
-## ✨ Novidades da Versão 2.0
+A **versão 3.0** foca na maturidade de marca e design da aplicação. O motor de processamento, a arquitetura limpa (**Clean Architecture**), o processamento **100% In-Memory** e a **Integração OAuth2 com o Strava** consolidados na V2 continuam intactos no backend, ganhando agora uma nova interface moderna e coesa.
 
-*   **Integração Nativa com o Strava (OAuth2):** Conecte sua conta com um clique. O sistema importa automaticamente sua quilometragem, tempo, elevação e o mapa da rota (`summary_polyline`) sem a necessidade de arquivos manuais.
-*   **Processamento 100% em Memória (Zero I/O):** Arquivos temporários no disco são coisas do passado. As imagens, matrizes LUT e mapas são processados na RAM utilizando `io.BytesIO`, reduzindo drasticamente a latência e protegendo o armazenamento do servidor.
-*   **Tutorial Inteligente e Adaptativo:** A interface frontend detecta dinamicamente o método escolhido (Strava ou Upload Manual) e guia o usuário apenas pelos passos necessários, ocultando as complexidades.
-*   **Detecção Dinâmica de Dispositivo:** O sistema reconhece se você está acessando via *Mobile* ou *Desktop* e adapta o botão de exportação de forma contextual ("Baixar no Celular" vs "Baixar no Computador").
-*   **Arquitetura Desacoplada:** O código foi separado em domínios específicos (`strava_client.py`, `poster_service.py`, motor de imagem e rotas FastAPI), garantindo escalabilidade total.
+## ✨ Novidades da Versão 3.0
+
+*   **Identidade Visual Renovada & Rebranding (RouteCraft):** Evolução do nome genérico para **RouteCraft**, estabelecendo uma marca forte e reconhecida.
+*   **Visão de Estúdio Open-Source (Velora Labs):** O projeto agora é assinado pela **Velora Labs**, a semente de um estúdio focado em engenharia de dados e soluções visuais para ciclistas.
+*   **Logotipos e Isotipos Vetoriais Nativos:**
+    *   **Isotipo RouteCraft (`simbolo_RC.svg`):** A rota GPS contínua emoldurada em um retângulo estilo pôster, utilizando o gradiente entre *Adrenaline Orange* (`#FC5200`) e *Telemetry Cyan* (`#06B6D4`).
+    *   **Logotipo Velora Labs (`logo_VL.svg`):** O "V" angular com inspiração técnica e de código, assinando a aplicação no rodapé.
+*   **Design System Atualizado:**
+    *   **Paleta de Cores:** Fundo *Asfalto Espacial* (`#0F172A`), botões de ação e Strava em *Laranja Adrenalina* (`#FC5200`), e detalhes de foco, bordas, métricas e destaques do tutorial em *Cyan Telemetria* (`#06B6D4` / `#01D3F0`).
+    *   **Tipografia Oficial:** Integração das fontes *Outfit* (títulos do produto) e *Space Grotesk* (identidade do estúdio) via Google Fonts, mantendo a *Montserrat* para leitura de métricas e formulários.
+*   **Ajustes Finos de UI/UX:** Destaques visuais do assistente de tutorial adaptados para a cor de destaque principal, mantendo toda a lógica funcional da versão anterior.
 
 ---
 
@@ -52,7 +59,7 @@ git clone https://github.com/Ghost-Do-While/cycling-poster-generator.git
 cd cycling-poster-generator
 
 # Instalar dependências
-pip install fastapi uvicorn requests polyline pillow python-dotenv
+pip install -r requirements.txt
 ```
 
 ### 2. Variáveis de Ambiente (.env)
@@ -73,13 +80,13 @@ O sistema gera automaticamente as pastas de *assets* na primeira inicialização
 uvicorn server:app --reload
 ```
 
-Abra o seu navegador em `http://127.0.0.1:8000`. A mágica acontece instantaneamente sem recarregar a página.
+Abra o seu navegador em `[http://127.0.0.1:8000](http://127.0.0.1:8000)`. A mágica acontece instantaneamente sem recarregar a página.
 
 ---
 
-## ⚙️ Como Funciona (Pipeline V2)
+## ⚙️ Como Funciona (Pipeline V3)
 
-A arquitetura do sistema foi desenhada em camadas estritamente isoladas:
+A arquitetura do sistema permanece desenhada em camadas estritamente isoladas:
 
 1. **Camada de Rede (`strava_client.py` & `server.py`):** Gerencia a conexão OAuth2, converte os *Authorization Codes* em Tokens, normaliza as respostas JSON e fornece os *endpoints* REST estáticos e dinâmicos.
 2. **Orquestração (`poster_service.py`):** Recebe o fluxo de bytes de imagens e parâmetros via HTTP e atua como o maestro do sistema, passando os dados entre as várias ferramentas matemáticas e visuais.
@@ -98,8 +105,8 @@ A arquitetura do sistema foi desenhada em camadas estritamente isoladas:
 | **Integração Strava** | Autenticação OAuth2 e conversão em tempo real de `summary_polyline`. | `requests`, `polyline` |
 | **Fotografias Base** | Orientação EXIF corrigida e Crop inteligente. Processamento *In-Memory*. | `Pillow`, `io.BytesIO` |
 | **Geometria Espacial** | Desenho matemático do trajeto da pedalada com escala dinâmica baseada em limites geográficos. | Python *Standard Library* (`xml.etree.ElementTree`) |
-| **Filtros de Cor (LUT)** | Modificação colorimétrica profunda na matriz RGB. | `Pillow` (Color3DLUT), `NumPy` |
-| **Tipografia & UI** | Renderização vetorial com sombras dinâmicas e blocos de desfoque suave (Blur Box) orgânicos. | Fontes TrueType (`.ttf`), Filtros Gaussianos |
+| **Filtros de Cor (LUT)** | Modificação colorimétrica profunda na matriz RGB via matrizes HaldCLUT. | `Pillow` (Color3DLUT), `NumPy` |
+| **Tipografia & UI** | Interface com Tailwind CSS, fontes *Outfit*, *Space Grotesk* e renderização TrueType (`.ttf`). | Google Fonts, Fontes TrueType, Filtros Gaussianos |
 
 ---
 
@@ -113,18 +120,33 @@ O sistema foi desenhado levando em conta os algoritmos de compressão e recorte 
 
 ---
 
+## 🤝 Como Contribuir
+
+Adoraríamos ter a sua ajuda para evoluir o **RouteCraft** e construir o ecossistema da **Velora Labs**! Você pode:
+- Reportar bugs ou sugerir novas ideias na aba **Issues**.
+- Enviar um **Pull Request** com melhorias no código, otimizações no motor de renderização ou novos recursos.
+- Compartilhar novos arquivos **HaldCLUT** (filtros de cor) ou conversões de arquivos **.CUBE** para adicionar à pasta `assets/presets`.
+
+---
+
 ## ❓ FAQ (Perguntas Frequentes)
+
+<details>
+<summary><strong>O que mudou da versão 2.0 para a 3.0?</strong></summary>
+
+Não houve alterações drásticas na lógica de negócio do servidor ou no motor de renderização. A versão 3.0 consolida a marca **RouteCraft**, introduz o conceito do estúdio **Velora Labs**, atualiza a paleta de cores (Cyan + Laranja em fundo Slate), integra novos logotipos/isotipos em SVG e refina a tipografia para um nível de produto profissional.
+</details>
 
 <details>
 <summary><strong>Sou obrigado a conectar a minha conta do Strava?</strong></summary>
 
-Não! Embora a V2.0 traga uma integração perfeita com o Strava, o sistema continua a suportar rotas 100% manuais de forma independente. Basta ignorar o botão de Login, enviar o seu arquivo GPX e digitar os números livremente.
+Não! O sistema continua a suportar rotas 100% manuais de forma independente. Basta ignorar o botão de Login, enviar o seu arquivo GPX e digitar os números livremente.
 </details>
 
 <details>
 <summary><strong>Por que usar arquivos HaldCLUT em vez de filtros nativos?</strong></summary>
 
-Os arquivos HaldCLUT permitem que você crie uma edição complexa no Lightroom (mexendo em dezenas de eixos, curvas e saturações) e exporte essa "matemática" em uma grade PNG (ex: 512x512). O servidor lê esse PNG com o `NumPy` e replica o efeito exato em uma fração de segundo na sua fotografia.
+Os arquivos HaldCLUT permitem que você crie uma edição complexa no Lightroom, DaVinci Resolve ou Photopea (mexendo em curvas, saturações e eixos de cor) e exporte essa "matemática" em uma grade PNG (ex: 512x512). O servidor lê esse PNG com o `NumPy` e replica o efeito exato em uma fração de segundo na sua fotografia.
 </details>
 
 <details>
@@ -139,4 +161,4 @@ Nada fica retido no servidor. A arquitetura atual é 100% focada na memória RAM
 
 [MIT](LICENSE)
 
-Desenvolvido para amantes de ciclismo, código limpo e design profissional. Sinta-se livre para utilizar, clonar, alterar ou integrar este código em outros projetos comerciais ou recreativos.
+Desenvolvido para amantes de ciclismo, código limpo e design profissional sob a iniciativa **Velora Labs**. Sinta-se livre para utilizar, clonar, alterar ou integrar este código em outros projetos comerciais ou recreativos.

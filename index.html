@@ -3,23 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Cycling Poster Generator</title>
+    <title>RouteCraft | by Velora Labs</title>
+    <link rel="icon" type="image/png" href="assets/images/simbolo_RC.svg">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Outfit:wght@300;500;600;700&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Montserrat', sans-serif; background-color: #0f172a; color: #f8fafc; overflow-x: hidden; }
+        .font-outfit { font-family: 'Outfit', sans-serif; }
+        .font-space { font-family: 'Space Grotesk', sans-serif; }
+        
         .strava-orange { background-color: #FC5200; }
         .strava-orange:hover { background-color: #e04a00; }
+        .rc-cyan-text { color: #06B6D4; }
+        .rc-cyan-bg { background-color: #06B6D4; }
+        
         .glass-panel { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(71, 85, 105, 0.5); }
         
         @keyframes tutorial-pulse {
-            0% { box-shadow: 0 0 0 0 rgba(252, 82, 0, 0.8); border-color: #FC5200; }
-            70% { box-shadow: 0 0 0 12px rgba(252, 82, 0, 0); border-color: #ff7b33; }
-            100% { box-shadow: 0 0 0 0 rgba(252, 82, 0, 0); border-color: #FC5200; }
+            0% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.8); border-color: #06B6D4; }
+            70% { box-shadow: 0 0 0 12px rgba(6, 182, 212, 0); border-color: #01D3F0; }
+            100% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0); border-color: #06B6D4; }
         }
         .tutorial-highlight {
             animation: tutorial-pulse 2s infinite !important;
-            border: 2px solid #FC5200 !important;
+            border: 2px solid #06B6D4 !important;
             border-radius: 0.5rem;
             position: relative;
             z-index: 40;
@@ -31,12 +38,12 @@
 <body class="min-h-screen p-3 md:p-8 relative pb-24">
 
     <div id="welcomeModal" class="fixed inset-0 bg-slate-900/95 backdrop-blur-md z-[60] flex items-center justify-center hidden px-4">
-        <div class="bg-slate-800 p-6 md:p-8 rounded-2xl max-w-sm w-full shadow-2xl border border-[#FC5200]/30 text-center relative overflow-hidden">
-            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#FC5200] to-yellow-500"></div>
+        <div class="bg-slate-800 p-6 md:p-8 rounded-2xl max-w-sm w-full shadow-2xl border border-[#06B6D4]/40 text-center relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#06B6D4] to-[#01D3F0]"></div>
             <div class="text-5xl mb-4">🚴✨</div>
-            <h2 class="text-2xl font-bold mb-2 text-white">Pronto para criar?</h2>
+            <h2 class="text-2xl font-bold font-outfit mb-2 text-white">Pronto para criar?</h2>
             <p class="text-slate-300 mb-6 text-sm">Vou te guiar passo a passo para criar sua arte de ciclismo de forma super rápida.</p>
-            <button id="btnStart" class="w-full bg-[#FC5200] hover:bg-[#e04a00] text-white font-bold py-3 md:py-4 rounded-xl transition shadow-[0_0_20px_rgba(252,82,0,0.4)] text-lg">
+            <button id="btnStart" class="w-full bg-[#06B6D4] hover:bg-[#01D3F0] text-slate-950 font-outfit font-bold py-3 md:py-4 rounded-xl transition shadow-[0_0_20px_rgba(6,182,212,0.4)] text-lg">
                 Iniciar Tutorial Rápido
             </button>
             <button id="btnSkipModal" class="mt-4 text-xs text-slate-500 hover:text-slate-300 underline">
@@ -45,21 +52,21 @@
         </div>
     </div>
 
-    <div id="tutorialBanner" class="fixed bottom-0 left-0 right-0 bg-[#FC5200] text-white p-4 shadow-[0_-10px_40px_rgba(252,82,0,0.4)] z-50 transform translate-y-full transition-transform duration-300 flex justify-between items-center rounded-t-2xl md:rounded-none hidden">
+    <div id="tutorialBanner" class="fixed bottom-0 left-0 right-0 bg-[#06B6D4] text-slate-950 p-4 shadow-[0_-10px_40px_rgba(6,182,212,0.4)] z-50 transform translate-y-full transition-transform duration-300 flex justify-between items-center rounded-t-2xl md:rounded-none hidden">
         <div class="flex-1 pr-4">
-            <p id="tutorialText" class="text-base font-bold leading-tight"></p>
-            <p id="tutorialSubtext" class="text-xs opacity-90 mt-1"></p>
+            <p id="tutorialText" class="text-base font-outfit font-bold leading-tight"></p>
+            <p id="tutorialSubtext" class="text-xs opacity-90 mt-1 font-medium"></p>
         </div>
-        <button id="tutorialNextBtn" class="bg-white text-[#FC5200] px-4 py-2 rounded-full text-sm font-bold shadow-lg active:scale-95 transition shrink-0">Avançar</button>
+        <button id="tutorialNextBtn" class="bg-slate-950 text-white px-5 py-2 rounded-full text-sm font-outfit font-bold shadow-lg active:scale-95 transition shrink-0">Avançar</button>
         <button id="tutorialSkipBtn" class="absolute -top-3 right-4 bg-slate-800 text-slate-300 w-8 h-8 flex items-center justify-center rounded-full text-lg shadow-lg border border-slate-600">×</button>
     </div>
 
     <div class="max-w-4xl mx-auto">
-        <header class="mb-6 md:mb-8 text-center relative">
-            <h1 class="text-2xl md:text-3xl font-bold tracking-tight mb-2">🚴 CYCLING POSTER <span class="text-[#FC5200]">GENERATOR</span></h1>
-            <p class="text-slate-400 text-sm md:text-base px-2">Transforme suas pedaladas em artes épicas.</p>
+        <header class="mb-6 md:mb-8 text-center relative flex flex-col items-center">
+            <img src="assets/images/logo_RC.svg" alt="RouteCraft" class="h-16 md:h-20 mb-3 drop-shadow-md">
+            <p class="text-slate-400 text-sm md:text-base px-2 font-outfit font-light">Transforme suas pedaladas em artes épicas.</p>
             
-            <div id="step_strava" class="mt-6 md:mt-8 flex flex-col justify-center items-center p-4">
+            <div id="step_strava" class="mt-6 md:mt-8 flex flex-col justify-center items-center p-4 w-full">
                 <a id="btnStravaLogin" href="/strava/login" class="flex items-center justify-center gap-2 bg-white text-slate-800 font-bold py-3 px-8 rounded-full shadow-md hover:bg-slate-200 transition mb-2 w-full max-w-xs">
                     <svg class="w-6 h-6 text-[#FC5200]" viewBox="0 0 24 24" fill="currentColor"><path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169"/></svg>
                     Conectar Strava
@@ -68,12 +75,12 @@
                     🔒 Seguro & Privado: Nenhuma senha ou histórico é salvo.
                 </p>
                 
-                <div id="stravaActivitiesWrapper" class="hidden w-full max-w-md bg-slate-800/90 p-4 rounded-xl border border-[#FC5200]/50 shadow-lg mt-2 mb-4">
+                <div id="stravaActivitiesWrapper" class="hidden w-full max-w-md bg-slate-800/90 p-4 rounded-xl border border-[#06B6D4]/50 shadow-lg mt-2 mb-4">
                     <div class="flex items-center gap-2 mb-2">
-                        <svg class="w-5 h-5 text-[#FC5200]" viewBox="0 0 24 24" fill="currentColor"><path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169"/></svg>
-                        <label class="block text-sm font-semibold text-slate-200">Selecione a Atividade:</label>
+                        <svg class="w-5 h-5 text-[#06B6D4]" viewBox="0 0 24 24" fill="currentColor"><path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169"/></svg>
+                        <label class="block text-sm font-semibold font-outfit text-slate-200">Selecione a Atividade:</label>
                     </div>
-                    <select id="strava_activity_select" class="w-full bg-slate-900 border border-slate-600 rounded-md text-sm md:text-sm px-3 py-3 md:py-2 focus:outline-none focus:border-[#FC5200] text-slate-200">
+                    <select id="strava_activity_select" class="w-full bg-slate-900 border border-slate-600 rounded-md text-sm md:text-sm px-3 py-3 md:py-2 focus:outline-none focus:border-[#06B6D4] text-slate-200">
                         <option value="" disabled selected>-- Escolha uma atividade --</option>
                     </select>
                     <p id="stravaSuccessMsg" class="text-xs text-green-400 font-bold mt-3 hidden text-center bg-green-900/30 py-2 rounded-md border border-green-500/30">
@@ -84,7 +91,7 @@
                 <div id="manualGpxWrapper" class="w-full max-w-md mt-2">
                     <div class="relative flex py-2 items-center">
                         <div class="flex-grow border-t border-slate-700"></div>
-                        <span class="flex-shrink-0 mx-4 text-slate-500 text-xs">OU ENVIE UM ARQUIVO MANUAL</span>
+                        <span class="flex-shrink-0 mx-4 text-slate-500 text-xs font-space uppercase">OU ENVIE UM ARQUIVO MANUAL</span>
                         <div class="flex-grow border-t border-slate-700"></div>
                     </div>
                     <label class="block text-sm font-medium mb-1 text-left mt-2">Arquivo GPX (Opcional)</label>
@@ -99,7 +106,7 @@
                     <input type="hidden" id="polyline_data" name="polyline_data" value="">
 
                     <div>
-                        <h2 class="text-base md:text-lg font-semibold border-b border-slate-600 pb-2 mb-4 text-[#FC5200]">Fotos & Cores</h2>
+                        <h2 class="text-base md:text-lg font-semibold font-outfit border-b border-slate-600 pb-2 mb-4 rc-cyan-text">Fotos & Cores</h2>
                         <div class="space-y-4">
                             <div id="step_photo" class="p-2 -mx-2">
                                 <label class="block text-sm font-medium mb-1">Foto Base <span class="text-red-400">*</span></label>
@@ -107,7 +114,7 @@
                             </div>
                             <div id="step_preset" class="p-2 -mx-2">
                                 <label class="block text-sm font-medium mb-1">Filtro de Cor (Opcional)</label>
-                                <select id="preset_id" name="preset_id" class="w-full bg-slate-800 border border-slate-600 rounded-md text-base md:text-sm px-3 py-3 md:py-2 text-slate-200 focus:outline-none focus:border-[#FC5200]">
+                                <select id="preset_id" name="preset_id" class="w-full bg-slate-800 border border-slate-600 rounded-md text-base md:text-sm px-3 py-3 md:py-2 text-slate-200 focus:outline-none focus:border-[#06B6D4]">
                                     <option value="" disabled selected>-- Escolha um Filtro --</option>
                                     <option value="nenhum">Nenhum (Manter Original)</option>
                                 </select>
@@ -123,53 +130,53 @@
                     </div>
 
                     <div id="step_texts" class="p-2 -mx-2">
-                        <h2 class="text-base md:text-lg font-semibold border-b border-slate-600 pb-2 mb-4 text-[#FC5200]">A História</h2>
+                        <h2 class="text-base md:text-lg font-semibold font-outfit border-b border-slate-600 pb-2 mb-4 rc-cyan-text">A História</h2>
                         <div class="grid grid-cols-2 gap-3">
                             <div class="col-span-2 md:col-span-1">
                                 <label class="block text-sm font-medium mb-1">Início da Rota <span class="text-red-400">*</span></label>
-                                <input type="text" id="start_loc" name="start_loc" placeholder="Ex: Casa" required class="w-full bg-slate-800 border border-slate-600 rounded-md text-base md:text-sm px-3 py-3 md:py-2 focus:outline-none focus:border-[#FC5200]">
+                                <input type="text" id="start_loc" name="start_loc" placeholder="Ex: Casa" required class="w-full bg-slate-800 border border-slate-600 rounded-md text-base md:text-sm px-3 py-3 md:py-2 focus:outline-none focus:border-[#06B6D4]">
                             </div>
                             <div class="col-span-2 md:col-span-1">
                                 <label class="block text-sm font-medium mb-1">Destino <span class="text-red-400">*</span></label>
-                                <input type="text" id="end_loc" name="end_loc" placeholder="Ex: Montanha" required class="w-full bg-slate-800 border border-slate-600 rounded-md text-base md:text-sm px-3 py-3 md:py-2 focus:outline-none focus:border-[#FC5200]">
+                                <input type="text" id="end_loc" name="end_loc" placeholder="Ex: Montanha" required class="w-full bg-slate-800 border border-slate-600 rounded-md text-base md:text-sm px-3 py-3 md:py-2 focus:outline-none focus:border-[#06B6D4]">
                             </div>
                             <div class="col-span-2">
                                 <label class="block text-sm font-medium mb-1">Com quem foi? <span class="text-red-400">*</span></label>
-                                <input type="text" id="cyclists" name="cyclists" placeholder="Ex: Solo Ride ou c/ Amigos" required class="w-full bg-slate-800 border border-slate-600 rounded-md text-base md:text-sm px-3 py-3 md:py-2 focus:outline-none focus:border-[#FC5200]">
+                                <input type="text" id="cyclists" name="cyclists" placeholder="Ex: Solo Ride ou c/ Amigos" required class="w-full bg-slate-800 border border-slate-600 rounded-md text-base md:text-sm px-3 py-3 md:py-2 focus:outline-none focus:border-[#06B6D4]">
                             </div>
                             <div class="col-span-2">
                                 <label class="block text-sm font-medium mb-1">Mensagem Final (Opcional)</label>
-                                <input type="text" id="mensagem_rodape" name="mensagem_rodape" placeholder="Deixe vazio para ocultar da arte" class="w-full bg-slate-800 border border-slate-600 rounded-md text-base md:text-sm px-3 py-3 md:py-2 focus:outline-none focus:border-[#FC5200]">
+                                <input type="text" id="mensagem_rodape" name="mensagem_rodape" placeholder="Deixe vazio para ocultar da arte" class="w-full bg-slate-800 border border-slate-600 rounded-md text-base md:text-sm px-3 py-3 md:py-2 focus:outline-none focus:border-[#06B6D4]">
                             </div>
                         </div>
                     </div>
 
                     <div id="step_metrics" class="p-2 -mx-2">
-                        <h2 class="text-base md:text-lg font-semibold border-b border-slate-600 pb-2 mb-4 text-[#FC5200]">Os Números</h2>
+                        <h2 class="text-base md:text-lg font-semibold font-outfit border-b border-slate-600 pb-2 mb-4 rc-cyan-text">Os Números</h2>
                         <p class="text-xs text-slate-400 mb-3">Preencha manualmente ou deixe o Strava preencher para você.</p>
                         <div class="grid grid-cols-2 gap-3">
                             <div>
                                 <label class="block text-sm font-medium mb-1">Distância (km) <span class="text-red-400">*</span></label>
-                                <input type="number" step="0.01" id="distance" name="distance" placeholder="Ex: 45.5" required class="w-full bg-slate-800 border border-slate-600 rounded-md text-base md:text-sm px-3 py-3 md:py-2 focus:outline-none focus:border-[#FC5200]">
+                                <input type="number" step="0.01" id="distance" name="distance" placeholder="Ex: 45.5" required class="w-full bg-slate-800 border border-slate-600 rounded-md text-base md:text-sm px-3 py-3 md:py-2 focus:outline-none focus:border-[#06B6D4]">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium mb-1">Tempo <span class="text-red-400">*</span></label>
-                                <input type="text" id="time_str" name="time_str" placeholder="Ex: 2:30:00" required class="w-full bg-slate-800 border border-slate-600 rounded-md text-base md:text-sm px-3 py-3 md:py-2 focus:outline-none focus:border-[#FC5200]">
+                                <input type="text" id="time_str" name="time_str" placeholder="Ex: 2:30:00" required class="w-full bg-slate-800 border border-slate-600 rounded-md text-base md:text-sm px-3 py-3 md:py-2 focus:outline-none focus:border-[#06B6D4]">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium mb-1">Elevação (m) <span class="text-red-400">*</span></label>
-                                <input type="number" id="elevation" name="elevation" placeholder="Ex: 600" required class="w-full bg-slate-800 border border-slate-600 rounded-md text-base md:text-sm px-3 py-3 md:py-2 focus:outline-none focus:border-[#FC5200]">
+                                <input type="number" id="elevation" name="elevation" placeholder="Ex: 600" required class="w-full bg-slate-800 border border-slate-600 rounded-md text-base md:text-sm px-3 py-3 md:py-2 focus:outline-none focus:border-[#06B6D4]">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium mb-1">Veloc. (km/h) <span class="text-red-400">*</span></label>
-                                <input type="number" step="0.1" id="speed" name="speed" placeholder="Ex: 22.5" required class="w-full bg-slate-800 border border-slate-600 rounded-md text-base md:text-sm px-3 py-3 md:py-2 focus:outline-none focus:border-[#FC5200]">
+                                <input type="number" step="0.1" id="speed" name="speed" placeholder="Ex: 22.5" required class="w-full bg-slate-800 border border-slate-600 rounded-md text-base md:text-sm px-3 py-3 md:py-2 focus:outline-none focus:border-[#06B6D4]">
                             </div>
                         </div>
                     </div>
 
                     <div>
                         <label class="block text-sm font-medium mb-1">Formato de Imagem</label>
-                        <select name="format_choice" class="w-full bg-slate-800 border border-slate-600 rounded-md text-base md:text-sm px-3 py-3 md:py-2 focus:outline-none focus:border-[#FC5200]">
+                        <select name="format_choice" class="w-full bg-slate-800 border border-slate-600 rounded-md text-base md:text-sm px-3 py-3 md:py-2 focus:outline-none focus:border-[#06B6D4]">
                             <option value="1">Stories Instagram (9:16)</option>
                             <option value="2">Feed Instagram (4:5)</option>
                             <option value="3">Original da Foto</option>
@@ -177,7 +184,7 @@
                     </div>
 
                     <div id="step_submit" class="p-2 -mx-2 mt-4">
-                        <button type="submit" id="submitBtn" class="w-full strava-orange text-white text-lg font-bold py-4 px-4 rounded-xl shadow-lg transition duration-200 flex justify-center items-center active:scale-95">
+                        <button type="submit" id="submitBtn" class="w-full strava-orange text-white text-lg font-outfit font-semibold tracking-wide py-4 px-4 rounded-xl shadow-lg transition duration-200 flex justify-center items-center active:scale-95">
                             <span>Gerar Arte Mágica</span>
                             <svg id="loadingSpinner" class="animate-spin hidden ml-3 h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                         </button>
@@ -188,17 +195,22 @@
 
             <div id="previewPanel" class="glass-panel rounded-2xl p-4 md:p-6 shadow-xl flex flex-col items-center justify-center min-h-[300px] md:min-h-[500px]">
                 <div id="placeholder" class="text-center text-slate-500">
-                    <p class="text-5xl mb-4 opacity-50">🖼️</p>
-                    <p class="text-sm">A arte final aparecerá aqui.</p>
+                    <img src="assets/images/simbolo_RC.svg" alt="Preview" class="h-16 opacity-30 mx-auto mb-4 grayscale">
+                    <p class="text-sm font-outfit font-light">A arte final aparecerá aqui.</p>
                 </div>
                 <div id="resultContainer" class="hidden w-full flex flex-col items-center">
                     <img id="resultImage" src="" alt="Poster" class="max-h-[50vh] md:max-h-[600px] rounded-lg shadow-2xl border border-slate-600 object-contain mb-6">
-                    <a id="downloadBtn" href="" download="poster_strava.jpg" class="bg-[#FC5200] text-white font-bold py-3 px-8 rounded-full shadow-lg active:scale-95 transition">
+                    <a id="downloadBtn" href="" download="poster_strava.jpg" class="bg-[#06B6D4] hover:bg-[#01D3F0] text-slate-950 font-outfit font-bold py-3 px-8 rounded-full shadow-[0_0_15px_rgba(6,182,212,0.4)] active:scale-95 transition">
                         Baixar no Computador
                     </a>
                 </div>
             </div>
         </div>
+
+        <footer class="mt-16 mb-4 flex flex-col items-center justify-center opacity-50 hover:opacity-100 transition-opacity duration-300">
+            <span class="text-[10px] text-[#01D3F0] font-space tracking-[0.25em] mb-2 uppercase">Engineered By</span>
+            <img src="assets/images/logo_VL.svg" alt="Velora Labs Logo" class="h-10">
+        </footer>
     </div>
 
     <script>
